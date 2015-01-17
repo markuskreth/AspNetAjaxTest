@@ -11,6 +11,11 @@ namespace AspNetAjaxTest
         protected void Page_Load(object sender, EventArgs e)
         {
             ListBox1.Attributes.Add("onchange", "listItemClicked('" + ListBox1.ID + "');");
+            ClientScriptManager scriptManager = Page.ClientScript;
+            string scriptCode = "<script type=\"text/javascript\">textInputId='" + TextBoxInput.ClientID + "';</script>";
+            scriptManager.RegisterStartupScript(GetType(), "initTextInputId", scriptCode);
+            scriptCode = "<script type=\"text/javascript\">textOutputId='" + TextOutput.ClientID + "';</script>";
+            scriptManager.RegisterStartupScript(GetType(), "initTextOutputId", scriptCode);
         }
     }
 }

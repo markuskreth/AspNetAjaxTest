@@ -11,12 +11,7 @@
 </head>
 <body>
     <form runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server">
-        <Services>
-            <asp:ServiceReference Path="AjaxService.svc" />
-        </Services>
-    </asp:ScriptManager>
-    <script type="text/javascript" src="Scripts/MyJavascript.js"></script>    
+    <script type="text/javascript" src="Scripts/MyJavascript.js"></script>
     <div class="page">
         <div class="header">
             <div class="title">
