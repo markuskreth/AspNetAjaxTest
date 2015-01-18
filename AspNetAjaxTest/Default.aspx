@@ -17,7 +17,7 @@
     <p>
         <asp:Label ID="Label1" runat="server" Text="Suche"></asp:Label>
         <asp:TextBox ID="TextBoxInput" runat="server" ClientIDMode="Static" Width="246px"></asp:TextBox>
-        <asp:Button ID="ButtonSearch" runat="server" Text="Zeige!" OnClientClick="QueryNoatim();return false;" />
+        <asp:Button ID="ButtonSearch" runat="server" Text="Zeige!" OnClientClick="QueryNominatim();return false;" />
         <asp:Label runat="server" Width="3px"></asp:Label>
         <asp:Label ID="Label2" runat="server" Text="Suche: "></asp:Label>
         <asp:DropDownList ID="DropDownSearch" runat="server" ClientIDMode="Static" Height="20px"

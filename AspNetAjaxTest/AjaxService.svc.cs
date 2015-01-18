@@ -6,6 +6,8 @@ using System.IO;
 using System.Net;
 using System.ServiceModel;
 using System.ServiceModel.Activation;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace AspNetAjaxTest
@@ -15,20 +17,22 @@ namespace AspNetAjaxTest
     public class AjaxService
     {
         private SqlConnection con = new SqlConnection("Data Source=VIRTUALBOX;Initial Catalog=Ast;Persist Security Info=True;User ID=markus;Password=0773");
-        private const string nominatimParams = "&format=json&countrycodes=de&polygon=1&addressdetails=1";
+        private const string nominatimParams = "&format=json&countrycodes=de&addressdetails=1";
 
         [OperationContract]
-        public String queryNoatim(String request)
+        public String queryNominatim(String request)
         {
             string uri = "http://nominatim.openstreetmap.org/search.php?q=" + request + nominatimParams;
             string response = "from ajax";
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(uri);
             req.UserAgent = HttpContext.Current.Request.UserAgent;
             req.Method = "POST";
-            WebResponse resp = req.GetResponse();
-            StreamReader reader = new StreamReader(resp.GetResponseStream());
+            HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+            Encoding enc = Encoding.GetEncoding(resp.CharacterSet);
+            StreamReader reader = new StreamReader(resp.GetResponseStream(), enc);
             response = reader.ReadToEnd();
             reader.Close();
+
             return response;
         }
 

@@ -76,38 +76,23 @@ function getHstSuccess(result) {
     }
 }
 
-function QueryNoatim() {
+function QueryNominatim() {
     if (service == null)
         service = new AspNetAjaxTest.AjaxService();
     var inputControl = document.getElementById(textInputId);
     var text = inputControl.value;
-    service.queryNoatim(text, processJsonNoatim, processAjaxFailure, null);
+    service.queryNominatim(text, processJsonNominatim, processAjaxFailure, null);
 }
 
-function processJsonNoatim(response) {
+function processJsonNominatim(response) {
     var output = document.getElementById(textOutputId);
     var arr;
+
     try {
-        var isJson = response[0].hasOwnProperty("place_id");
-        if (isJson) {
-            processJsonArrayNominatim(response);
-        }
-        arr = JSON.Parse(response);
+        arr = JSON.parse(response);
         processJsonArrayNominatim(arr);
     } catch (e) {
         alert(e);
-        try {
-            arr = JSON.Parse(response, null);
-            processJsonArrayNominatim(arr);
-        } catch (e) {
-            alert(e);
-            try {
-                arr = eval("(" + response + ")");
-                processJsonArrayNominatim(arr);
-            } catch (e) {
-                alert(e);
-            }
-        }
     }
     output.value = response;
 }
